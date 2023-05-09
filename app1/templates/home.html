@@ -11,16 +11,39 @@
 
 <body>
     <div class="container my-5">
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" id="inc" class="btn btn-primary">+</button>
-        </form>
-        <h3 id="value">1</h3>
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="inc" class="btn btn-primary">+</button>
+                </form>
+                <h3 id="value">1</h3>
 
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" id="dec" class="btn btn-primary">-</button>
-        </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" id="dec" class="btn btn-primary">-</button>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="myFunction()">
+                    <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                    <label class="form-check-label" for="exampleCheck1">Show Password</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -38,7 +61,7 @@
                 console.log(typeof (value));
                 value += 1;
                 $('#value').text(value);
-                mydata = { value: value, csrf: csrf};
+                mydata = { value: value, csrf: csrf };
                 $.ajax({
                     url: "{% url 'homepage' %}",
                     method: 'POST',
@@ -59,7 +82,7 @@
                     value -= 1;
                     $('#value').text(value);
                 }
-                mydata = { value: value, csrfmiddlewaretoken: csrf};
+                mydata = { value: value, csrfmiddlewaretoken: csrf };
                 $.ajax({
                     url: "{% url 'homepage' %}",
                     method: 'POST',
@@ -69,7 +92,18 @@
                     }
                 })
             });
-        })
+        });
+    </script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("exampleInputPassword1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
     </script>
 </body>
 
