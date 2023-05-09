@@ -41,7 +41,7 @@
                     <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
                     <label class="form-check-label" for="exampleCheck1">Show Password</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="btn">Submit</button>
             </form>
         </div>
     </div>
@@ -92,6 +92,13 @@
                     }
                 })
             });
+
+            $('#btn').click(function (e) {
+                $(this).hide();
+                e.preventDefault();
+                console.log("hellow");
+                $("<button class='btn btn-primary' type='submit'><span class='spinner-border spinner-border-sm'></span> Loading....</button>").insertAfter($(this));;
+            })
         });
     </script>
 
